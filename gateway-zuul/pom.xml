@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>gateway-zuul</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka</name>
+    <name>gateway-zuul</name>
     <description>Gateway Zuul</description>
 
     <properties>

@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>image-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka</name>
+    <name>image-service</name>
     <description>Image Service</description>
 
     <properties>

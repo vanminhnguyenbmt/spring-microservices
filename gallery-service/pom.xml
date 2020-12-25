@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>gallery-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka</name>
+    <name>gallery-service</name>
     <description>Gallery Service</description>
 
     <properties>
