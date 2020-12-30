@@ -24,6 +24,7 @@
         <module>image-service</module>
         <module>gallery-service</module>
         <module>gateway-zuul</module>
+        <module>auth-service</module>
     </modules>
 
     <dependencies>

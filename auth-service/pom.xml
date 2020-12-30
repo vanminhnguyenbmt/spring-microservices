@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>gateway-zuul</artifactId>
+    <artifactId>auth-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gateway-zuul</name>
-    <description>Gateway Zuul</description>
+    <name>auth-service</name>
+    <description>Authentication Service</description>
 
     <properties>
         <java.version>1.8</java.version>
