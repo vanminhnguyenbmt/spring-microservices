@@ -14,6 +14,10 @@ public class GalleryEntity {
     public GalleryEntity() {
     }
 
+    public GalleryEntity(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

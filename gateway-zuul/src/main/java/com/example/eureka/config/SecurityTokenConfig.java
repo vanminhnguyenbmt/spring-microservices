@@ -1,5 +1,7 @@
-package com.example.eureka.SecurityConfig;
+package com.example.eureka.config;
 
+import com.example.common.model.JwtConfig;
+import com.example.eureka.filter.JwtTokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

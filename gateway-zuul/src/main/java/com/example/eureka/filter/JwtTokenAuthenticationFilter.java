@@ -1,5 +1,6 @@
-package com.example.eureka.SecurityConfig;
+package com.example.eureka.filter;
 
+import com.example.common.model.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,7 +45,6 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         try {
             // exceptions might be thrown in creating the claims if for example the token is expired
             // 4. Validate the token
-
             Claims claims = Jwts.parser()
                     .setSigningKey(jwtConfig.getSecret().getBytes())
                     .parseClaimsJws(token)

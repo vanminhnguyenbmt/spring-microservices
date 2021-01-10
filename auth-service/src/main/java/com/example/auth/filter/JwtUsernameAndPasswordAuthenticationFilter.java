@@ -1,5 +1,7 @@
-package com.example.auth.SecurityConfig;
+package com.example.auth.filter;
 
+import com.example.auth.model.UserCredentials;
+import com.example.common.model.JwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

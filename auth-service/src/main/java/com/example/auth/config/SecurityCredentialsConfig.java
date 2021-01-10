@@ -1,5 +1,7 @@
-package com.example.auth.SecurityConfig;
+package com.example.auth.config;
 
+import com.example.auth.filter.JwtUsernameAndPasswordAuthenticationFilter;
+import com.example.common.model.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

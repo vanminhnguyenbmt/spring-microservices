@@ -1,4 +1,4 @@
-package com.example.auth.SecurityConfig;
+package com.example.auth.model;
 
 // A (temporary) class represent the user saved in the database.
 public class AppUser {
