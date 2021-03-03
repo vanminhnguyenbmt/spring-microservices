@@ -16,6 +16,6 @@
 -  **Intelligent Routing, Load Balancing:** Netflix Ribbon
 -  **Monitoring:** Netflix Hystrix dashboard and Netflix Turbine
 -  **Log Tracing:** Sleuth, Zipkin
-#### Architecture
+### Architecture
 ![Netflix OSS's architecture](readme/netflix-oss-architecture.png)
 
