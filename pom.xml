@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.7.RELEASE</version>
+        <version>2.5.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -21,11 +21,12 @@
 
     <modules>
         <module>common</module>
+        <module>config-server</module>
         <module>eureka-server</module>
-        <module>image-service</module>
-        <module>gallery-service</module>
         <module>gateway-zuul</module>
         <module>auth-service</module>
+        <module>image-service</module>
+        <module>gallery-service</module>
     </modules>
 
     <dependencies>
