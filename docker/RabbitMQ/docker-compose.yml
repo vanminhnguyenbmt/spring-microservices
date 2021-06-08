@@ -1,0 +1,14 @@
+version: "3.1"
+
+services:
+  local-rabbitmq:
+    image: rabbitmq:3-management
+    container_name: local-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: karma
+      RABBITMQ_DEFAULT_PASS: Karma@123
+    ports:
+      - 15672:15672
+    volumes:
+      - ./docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./docker-conf/rabbitmq/log/:/var/log/rabbitmq
