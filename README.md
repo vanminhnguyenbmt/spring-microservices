@@ -14,8 +14,9 @@
 -  **Circuit Breaker:** Netflix Hystrix
 -  **Gatekeeper:** Netflix Zuul
 -  **Intelligent Routing, Load Balancing:** Netflix Ribbon
--  **Monitoring:** Netflix Hystrix dashboard and Netflix Turbine
+-  **Monitoring:** Netflix Hystrix Dashboard and Netflix Turbine
 -  **Log Tracing:** Sleuth, Zipkin
+-  **Centralized Configuration:** Spring Cloud Config Server
 ### Architecture
 ![Netflix OSS's architecture](readme/netflix-oss-architecture.png)
 
