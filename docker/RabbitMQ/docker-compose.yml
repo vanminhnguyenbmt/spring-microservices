@@ -5,8 +5,8 @@ services:
     image: rabbitmq:3-management
     container_name: local-rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: karma
-      RABBITMQ_DEFAULT_PASS: Karma@123
+      RABBITMQ_DEFAULT_USER: nguyenvm
+      RABBITMQ_DEFAULT_PASS: nguyenvm@123
     ports:
       - 15672:15672
     volumes:

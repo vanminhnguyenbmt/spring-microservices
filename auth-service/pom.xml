@@ -8,7 +8,7 @@
         <version>2.5.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.karma</groupId>
+    <groupId>com.nguyenvm</groupId>
     <artifactId>auth-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>auth-service</name>
@@ -33,7 +33,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.karma</groupId>
+            <groupId>com.nguyenvm</groupId>
             <artifactId>common</artifactId>
             <version>1.0.0</version>
         </dependency>
