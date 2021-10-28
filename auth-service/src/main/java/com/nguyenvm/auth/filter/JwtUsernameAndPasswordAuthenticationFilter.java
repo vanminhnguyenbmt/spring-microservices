@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -74,5 +75,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
         // Add token to header
         response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
+
+        // return body
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.print(token);
+        out.flush();
     }
 }

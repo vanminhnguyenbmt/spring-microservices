@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -27,17 +31,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 new AppUser(2, "admin", bCryptPasswordEncoder.encode("12345"), "ADMIN")
         );
 
-        for (AppUser appUser : users) {
-            if (appUser.getUsername().equals(username)) {
+        Map<String, AppUser> userMap = users.stream().collect(Collectors.toMap(AppUser::getUsername, Function.identity()));
 
-                // Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
-                // So, we need to set it to that format, so we can verify and compare roles (i.e. hasRole("ADMIN")).
-                List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_" + appUser.getRole());
+        AppUser appUser = userMap.get(username);
+        if (Objects.nonNull(appUser)) {
+            // Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
+            // So, we need to set it to that format, so we can verify and compare roles (i.e. hasRole("ADMIN")).
+            List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_" + appUser.getRole());
 
-                // The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
-                // And used by auth manager to verify and check user authentication.
-                return new User(appUser.getUsername(), appUser.getPassword(), grantedAuthorities);
-            }
+            // The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
+            // And used by auth manager to verify and check user authentication.
+            return new User(appUser.getUsername(), appUser.getPassword(), grantedAuthorities);
         }
 
         // If user not found. Throw this exception.

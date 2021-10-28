@@ -2,6 +2,7 @@ package com.nguyenvm.imageservice.controller;
 
 import com.nguyenvm.imageservice.entity.ImageEntity;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,11 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/image")
 public class ImageController {
 
     @HystrixCommand
-    @RequestMapping("/images")
+    @GetMapping("/getAll")
     public List<ImageEntity> getImages(@RequestParam(name = "isFallBack", defaultValue = "false") boolean isFallBack) throws Exception {
         List<ImageEntity> images = Arrays.asList(
                 new ImageEntity(1, "Treehouse of Horror V", "https://www.imdb.com/title/tt0096697/mediaviewer/rm3842005760"),
