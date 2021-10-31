@@ -2,4 +2,7 @@
 .DS_Store
 *.iml
 
-docker/RabbitMQ/docker-conf/
+docker/rabbit-mq/*
+!docker/rabbit-mq/docker-compose.yml
+docker/kafka/*
+!docker/kafka/docker-compose.yml

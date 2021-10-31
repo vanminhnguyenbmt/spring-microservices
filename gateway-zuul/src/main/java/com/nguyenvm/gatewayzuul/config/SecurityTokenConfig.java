@@ -30,13 +30,13 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint((req, res, e) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 // Add a filter to validate the tokens with every request
-                .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
+//                .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 // authorization requests config
                 .authorizeRequests()
                 // allow all who are accessing "auth" service
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
-                .antMatchers("/gallery/**", "/admin/**").hasRole("ADMIN")
+                .antMatchers("/gallery/**", "/admin/**").permitAll()
                 .anyRequest().authenticated();
     }
 
