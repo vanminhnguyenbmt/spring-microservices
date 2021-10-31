@@ -1,6 +1,6 @@
-package com.nguyenvm.gatewayzuul.filter;
+package com.nguyenvm.galleryservice.config.filter;
 
-import com.nguyenvm.common.model.JwtConfig;
+import com.nguyenvm.common.config.properties.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,15 +13,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.interfaces.RSAPrivateKey;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
     private final JwtConfig jwtConfig;
+    private final RSAPrivateKey rsaPrivateKey;
 
-    public JwtTokenAuthenticationFilter(JwtConfig jwtConfig) {
+    public JwtTokenAuthenticationFilter(JwtConfig jwtConfig, RSAPrivateKey rsaPrivateKey) {
         this.jwtConfig = jwtConfig;
+        this.rsaPrivateKey = rsaPrivateKey;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         String header = httpServletRequest.getHeader(jwtConfig.getHeader());
 
         // 2. validate the header and check the prefix
-        if(header == null || !header.startsWith(jwtConfig.getPrefix())) {
+        if (header == null || !header.startsWith(jwtConfig.getPrefix())) {
             filterChain.doFilter(httpServletRequest, httpServletResponse);        // If not valid, go to the next filter.
             return;
         }
@@ -45,14 +48,15 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         try {
             // exceptions might be thrown in creating the claims if for example the token is expired
             // 4. Validate the token
-            Claims claims = Jwts.parser()
-                    .setSigningKey(jwtConfig.getSecret().getBytes())
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(rsaPrivateKey)
+                    .build()
                     .parseClaimsJws(token)
                     .getBody();
 
             String username = claims.getSubject();
             if (Objects.nonNull(username)) {
-                 List<String> authorities = (List<String>) claims.get("authorities");
+                List<String> authorities = (List<String>) claims.get("authorities");
 
                 // 5. Create auth object
                 // UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.

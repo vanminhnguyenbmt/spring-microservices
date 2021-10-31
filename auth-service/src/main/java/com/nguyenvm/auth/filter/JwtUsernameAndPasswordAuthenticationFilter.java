@@ -1,10 +1,9 @@
 package com.nguyenvm.auth.filter;
 
-import com.nguyenvm.auth.model.UserCredentials;
-import com.nguyenvm.common.model.JwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nguyenvm.auth.model.UserCredentials;
+import com.nguyenvm.common.config.properties.JwtConfig;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.interfaces.RSAPrivateKey;
 import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -28,10 +28,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     private AuthenticationManager authManager;
 
     private final JwtConfig jwtConfig;
+    private final RSAPrivateKey rsaPrivateKey;
 
-    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authManager, JwtConfig jwtConfig) {
+    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authManager, JwtConfig jwtConfig, RSAPrivateKey rsaPrivateKey) {
         this.authManager = authManager;
         this.jwtConfig = jwtConfig;
+        this.rsaPrivateKey = rsaPrivateKey;
 
         // By default, UsernamePasswordAuthenticationFilter listens to "/login" path.
         // In our case, we use "/auth". So, we need to override the defaults.
@@ -70,7 +72,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .claim("authorities", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + jwtConfig.getExpiration() * 1000))    // in milliseconds
-                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
+                .signWith(rsaPrivateKey)
                 .compact();
 
         // Add token to header

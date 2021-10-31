@@ -43,7 +43,6 @@ public class GalleryServiceImpl implements GalleryService {
 
         GalleryDTO galleryDTO = GalleryEntityToDTOMapper.base(gallery);
 
-        // produce message to kafka
         produceMessage(galleryDTO);
         return galleryDTO;
     }
@@ -51,9 +50,14 @@ public class GalleryServiceImpl implements GalleryService {
     // a fallback method to be called if failure happened
     public GalleryDTO fallBack(Integer galleryId, Boolean isFallBack, Throwable hystrixCommand) {
         log.error("Fallback getGallery ... ", hystrixCommand);
-        return new GalleryDTO(galleryId, null);
+
+        GalleryDTO galleryDTO = new GalleryDTO(galleryId, null);
+
+        produceMessage(galleryDTO);
+        return galleryDTO;
     }
 
+    // produce message to kafka
     private void produceMessage(GalleryDTO galleryDTO) {
         final Map<String, Object> configs = new HashMap<>();
         configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
