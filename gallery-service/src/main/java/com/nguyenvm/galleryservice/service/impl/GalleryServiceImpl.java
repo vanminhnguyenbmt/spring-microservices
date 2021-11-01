@@ -1,21 +1,19 @@
 package com.nguyenvm.galleryservice.service.impl;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.nguyenvm.galleryservice.config.properties.KafkaProperties;
 import com.nguyenvm.galleryservice.model.dto.GalleryDTO;
 import com.nguyenvm.galleryservice.model.dto.mapper.GalleryEntityToDTOMapper;
 import com.nguyenvm.galleryservice.model.entity.GalleryEntity;
-import com.nguyenvm.galleryservice.model.kafka.GalleryDTOSerializer;
 import com.nguyenvm.galleryservice.service.GalleryService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +23,9 @@ public class GalleryServiceImpl implements GalleryService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    private KafkaProperties kafkaProperties;
+    @Resource
+    @Qualifier("producerConfig")
+    private Map<String, Object> producerConfig;
 
     @HystrixCommand(fallbackMethod = "fallBack")
     public GalleryDTO getGallery(Integer id, Boolean isFallBack) {
@@ -59,20 +58,31 @@ public class GalleryServiceImpl implements GalleryService {
 
     // produce message to kafka
     private void produceMessage(GalleryDTO galleryDTO) {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, kafkaProperties.getKeySerializer());
-        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GalleryDTOSerializer.class.getName());
-        configs.put(ProducerConfig.BUFFER_MEMORY_CONFIG, kafkaProperties.getBufferMemory());
-        configs.put(ProducerConfig.RETRIES_CONFIG, kafkaProperties.getRetries());
+        KafkaProducer producer = new KafkaProducer<String, String>(producerConfig);
+        producer.initTransactions();
 
-        try (KafkaProducer producer = new KafkaProducer<String, String>(configs)) {
-            final ProducerRecord message = new ProducerRecord(
-                    "nguyenvm-topic",
-                    "nguyenvm-key",
+        try {
+            producer.beginTransaction();
+            ProducerRecord message1 = new ProducerRecord(
+                    "nguyenvm-topic-1",
                     galleryDTO
             );
-            producer.send(message);
+            ProducerRecord message2 = new ProducerRecord(
+                    "nguyenvm-topic-2",
+                    galleryDTO
+            );
+
+            producer.send(message1);
+            producer.send(message2);
+            producer.commitTransaction();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+
+            producer.abortTransaction();
+            producer.close();
+            throw new RuntimeException(e);
         }
+
+        producer.close();
     }
 }
