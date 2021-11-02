@@ -32,5 +32,5 @@
 - Authenticate: http://localhost:8762/auth (admin/12345)
 - Order service: http://localhost:8762/order?id=1&isFallBack=false (isFallBack=true will perform fall back method)
 - Hystrix Dashboard: http://localhost:9898/hystrix
-- Turbine Stream: http://localhost:8989 (used by ******Hystrix Dashboard** to monitor stream)
+- Turbine Stream: http://localhost:8989 (used by **Hystrix Dashboard** to monitor stream)
 ![Hystrix Dashboard](readme/hystrix-stream.png)
