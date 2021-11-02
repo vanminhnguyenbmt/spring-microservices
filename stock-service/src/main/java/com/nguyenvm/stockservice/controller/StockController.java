@@ -19,7 +19,7 @@ public class StockController {
 
     @HystrixCommand
     @GetMapping("/getAll")
-    public List<ProductDTO> getImages(@RequestParam(name = "isFallBack", defaultValue = "false") boolean isFallBack) throws Exception {
+    public List<ProductDTO> getListProduct(@RequestParam(name = "isFallBack", defaultValue = "false") boolean isFallBack) throws Exception {
         return stockService.getListProduct(isFallBack);
     }
 }
