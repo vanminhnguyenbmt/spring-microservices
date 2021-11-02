@@ -38,8 +38,8 @@
         <module>eureka-server</module>
         <module>gateway-zuul</module>
         <module>auth-service</module>
-        <module>image-service</module>
-        <module>gallery-service</module>
+        <module>stock-service</module>
+        <module>order-service</module>
         <module>hystrix-dashboard</module>
         <module>turbine-stream</module>
     </modules>

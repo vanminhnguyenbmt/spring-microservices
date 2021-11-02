@@ -19,7 +19,7 @@ import java.security.interfaces.RSAPublicKey;
 @Slf4j
 public class JwtConfig {
     @Value("${security.jwt.uri:/auth/**}")
-    private String Uri;
+    private String uri;
 
     @Value("${security.jwt.header:Authorization}")
     private String header;

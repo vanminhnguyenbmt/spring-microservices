@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "e99ef3bc-e222-490c-890d-6241eb722bd6",
+		"name": "spring-microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8762/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjM1ODQwOTUxLCJleHAiOjE2MzU5MjczNTF9.ne8jwC9s7axdotGmdEN86SjntBdw8gAB1Fa9MkWAjnsPpuWh0MATbqBxSZ5nwzQQyRLJrwrzatyeyvmmG5uVSEqzr-ELJeLXi8ZZX6wgvJouzEMM8T0bb0X5xVallx3klFf0WYHytErlgCw6VREnwZJtGxt7JHVL3XfiUl4ihx42cGoEd3dFRP5W8oQisd1zxJi3Swc-NCjPIFIwnFQvHrvssTIvxuuYud05pcjwO_NBgeXV2qZU1VWxKN0Fl9LnajERZgbAWkbT9Ecm1JzOIQbPe8yQdzcH5OOcGn3S9cPWny8qiSNgEa90Hydgjib0D6aQ7NANtboZVIY7JYsDTg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8762/order?id=1&isFallBack=false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"order"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "isFallBack",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getListProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8100/product/getAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"product",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
