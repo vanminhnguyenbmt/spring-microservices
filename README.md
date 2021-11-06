@@ -3,6 +3,8 @@
 - [Netflix OSS framework](#netflix-oss-framework)
   - [Overview](#overview)
   - [Architecture](#architecture)
+- [Build And Run](#build-and-run)
+  - [Build](#build)
   - [Demo](#demo)
 
 ## Netflix OSS framework
@@ -22,15 +24,35 @@
 ### Architecture
 ![Netflix OSS's architecture](readme/netflix-oss-architecture.png)
 
+## Build And Run
+### Build
+- `make docker/kafka/up` to start kafka cluster
+- `make setup` to build shared **POM** and **common** module (it's necessary to run other services)
+  - using **IntelliJ IDEA** file -> open -> select **spring-microservices** folder
+  - Start `config-server -> eureka-server -> gateway-zuul` firstly and then other services
+- `make build` to build and install shared dependencies
+   ![Build output](readme/build-output.png)
+- [Postman data](readme/spring-microservices.postman_collection.json)
+
 ### Demo
-1. `mvn clean install -DskipTests=true` at **common** module before running other applications
-2. `cd docker/kafka && docker-compose up -d` to start kafka cluster
-3.  [Postman data](readme/spring-microservices.postman_collection.json)
-- Kafka Brokers: localhost:19092, localhost:29092, localhost:39092
-- Eureka Server: http://localhost:8761 (service registry & service discovery)
-- Gateway Zuul: http://localhost:8762
-- Authenticate: http://localhost:8762/auth (admin/12345)
-- Order service: http://localhost:8762/order?id=1&isFallBack=false (isFallBack=true will perform fall back method)
-- Hystrix Dashboard: http://localhost:9898/hystrix
-- Turbine Stream: http://localhost:8989 (used by **Hystrix Dashboard** to monitor stream)
+- **Kafka Brokers**: localhost:19092, localhost:29092, localhost:39092
+- **Config Server**: http://localhost:8888/service-name/service-name.properties
+  >http://localhost:8888/order-service/order-service.properties will get all properties of order-service
+  ```bash
+    username: nguyenvm
+    password: nguyenvm@123
+  ```
+- **Eureka Server**: http://localhost:8761 (service registry & service discovery)
+- **Gateway Zuul**: http://localhost:8762
+- **Authenticate**: http://localhost:8762/auth
+  ```bash
+    username: admin
+    password: 12345
+  ```
+- **Order service**: http://localhost:8762/order?id=1&isFallBack=false (isFallBack=true will perform fall back method)
+- **Hystrix Dashboard**: http://localhost:9898/hystrix
+- **Turbine Stream**: http://localhost:8989 (used by **Hystrix Dashboard** to monitor stream)
+#### Hystrix Dashboard
 ![Hystrix Dashboard](readme/hystrix-stream.png)
+#### Eureka Server
+![Eureka Server](readme/eureka-server.png)

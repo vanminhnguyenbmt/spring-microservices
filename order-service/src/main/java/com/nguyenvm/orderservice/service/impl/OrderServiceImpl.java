@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
         OrderEntity order = new OrderEntity();
         order.setId(id);
 
-        // get list of available images
+        // get list of available products
         // isFallBack = true will make a fallback call
         List<Object> products = restTemplate.getForObject("http://stock-service/product/getAll?isFallBack=" + isFallBack, List.class);
         OrderDTO orderDTO = OrderEntityToDTOMapper.base(order, CollectionUtils.isEmpty(products) ? Collections.EMPTY_LIST : products);
