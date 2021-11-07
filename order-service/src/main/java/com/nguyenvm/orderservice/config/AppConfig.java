@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -52,14 +55,21 @@ public class AppConfig {
     @Bean("producerWithTransactionConfig")
     public Map<String, Object> producerWithTransactionConfig() {
         Map<String, Object> configs = new HashMap<>();
-        configs.put(ProducerConfig.CLIENT_ID_CONFIG, kafkaProperties.getClientId());
-        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class.getName());
+        configs.putAll(producerConfig());
         configs.put(ProducerConfig.BUFFER_MEMORY_CONFIG, kafkaProperties.getBufferMemory());
         configs.put(ProducerConfig.RETRIES_CONFIG, kafkaProperties.getRetries());
         configs.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, kafkaProperties.getTransactionId());
 
         return configs;
+    }
+
+    @Bean
+    public ProducerFactory<String, String> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfig());
+    }
+
+    @Bean
+    public KafkaTemplate<String, String> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
 }

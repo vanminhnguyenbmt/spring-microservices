@@ -38,7 +38,8 @@ public class OrderServiceImpl implements OrderService {
         OrderDTO orderDTO = OrderEntityToDTOMapper.base(order, CollectionUtils.isEmpty(products) ? Collections.EMPTY_LIST : products);
 
         // send message to order-topic
-        orderProducer.produceOrderTopic(orderDTO);
+//        orderProducer.produceOrderTopic(orderDTO);
+        orderProducer.produceOrderTopicUsingKafkaTemplate(orderDTO);
         return orderDTO;
     }
 

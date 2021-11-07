@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.nguyenvm</groupId>
+        <artifactId>pom-cloud</artifactId>
+        <version>1.0.0</version>
+        <relativePath>pom-cloud.xml</relativePath>
+    </parent>
+
+    <groupId>com.nguyenvm</groupId>
+    <artifactId>pom-service</artifactId>
+    <version>1.0.0</version>
+    <name>Pom service</name>
+    <description>Parent pom service project</description>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+    </dependencies>
+</project>

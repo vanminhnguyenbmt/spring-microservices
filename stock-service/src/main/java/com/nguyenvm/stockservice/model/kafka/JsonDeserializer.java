@@ -4,12 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nguyenvm.common.util.ContextUtil;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Objects;
 
-@Component
 public class JsonDeserializer<T> implements Deserializer<T> {
     public static final String VALUE_CLASS_NAME_CONFIG = "value.class.name";
     private Class<T> className;

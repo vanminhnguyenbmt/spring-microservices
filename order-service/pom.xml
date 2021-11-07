@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.nguyenvm</groupId>
-        <artifactId>pom-cloud</artifactId>
+        <artifactId>pom-service-tracking</artifactId>
         <version>1.0.0</version>
-        <relativePath>../pom-base/pom-cloud.xml</relativePath>
+        <relativePath>../pom-base/pom-service-tracking.xml</relativePath>
     </parent>
 
     <groupId>com.nguyenvm</groupId>
@@ -26,11 +26,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 

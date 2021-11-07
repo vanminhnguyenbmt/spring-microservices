@@ -4,7 +4,9 @@ import com.nguyenvm.orderservice.model.dto.OrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +22,9 @@ public class OrderProducer {
     @Resource
     @Qualifier("producerConfig")
     private Map<String, Object> producerConfig;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Resource
     @Qualifier("producerWithTransactionConfig")
@@ -52,5 +57,9 @@ public class OrderProducer {
         }
 
         producer.close();
+    }
+
+    public void produceOrderTopicUsingKafkaTemplate(OrderDTO orderDTO) {
+        kafkaTemplate.send(new ProducerRecord(orderTopic, orderDTO));
     }
 }
