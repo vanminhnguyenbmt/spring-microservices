@@ -15,4 +15,12 @@
     <packaging>jar</packaging>
     <name>common</name>
     <description>App common</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+    </dependencies>
 </project>

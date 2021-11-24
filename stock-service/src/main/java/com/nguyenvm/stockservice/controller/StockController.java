@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/stock/product")
 public class StockController {
     @Autowired
     private StockService stockService;

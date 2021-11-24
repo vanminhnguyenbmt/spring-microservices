@@ -8,10 +8,19 @@ build:
 
 # DOCKER
 docker/kafka/up:
-	docker-compose -f docker/kafka/docker-compose.yml up -d
+	@scripts/docker-setup.sh kafka up
 
 docker/kafka/down:
-	docker-compose -f docker/kafka/docker-compose.yml down
+	@scripts/docker-setup.sh kafka down
 
 docker/kafka/stop:
-	docker-compose -f docker/kafka/docker-compose.yml stop
+	@scripts/docker-setup.sh kafka stop
+
+docker/zipkin/up:
+	@scripts/docker-setup.sh zipkin up
+
+docker/zipkin/down:
+	@scripts/docker-setup.sh zipkin down
+
+docker/zipkin/stop:
+	@scripts/docker-setup.sh zipkin stop

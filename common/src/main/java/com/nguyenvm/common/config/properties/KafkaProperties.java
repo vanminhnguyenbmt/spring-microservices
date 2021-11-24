@@ -1,4 +1,4 @@
-package com.nguyenvm.stockservice.config.properties;
+package com.nguyenvm.common.config.properties;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,9 +19,24 @@ public class KafkaProperties {
     @Value("${kafka.retries:}")
     private Integer retries;
 
+    @Value("${kafka.max.request.size:}")
+    private Integer maxRequestSize;
+
+    @Value("${kafka.max.partition.fetch.bytes:}")
+    private Integer maxPartitionFetchByte;
+
     @Value("${kafka.transactional.id:}")
     private String transactionId;
 
     @Value("${kafka.group.id:}")
     private String groupId;
+
+    @Value("${kafka.auto.create.topics:}")
+    private Boolean autoCreateTopic;
+
+    @Value("zipkin-service")
+    private String zipkinClientId;
+
+    @Value("0")
+    private String zipkinAcks;
 }

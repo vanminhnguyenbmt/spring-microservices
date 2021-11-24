@@ -1,4 +1,4 @@
-# Building microservice using Spring Boot and Eureka
+# Building microservice using Spring Boot and Spring Cloud Netflix
 
 - [Netflix OSS framework](#netflix-oss-framework)
   - [Overview](#overview)
@@ -17,7 +17,7 @@
 - **Gatekeeper:** Netflix Zuul
 - **Intelligent Routing, Load Balancing:** Netflix Ribbon
 - **Monitoring:** Netflix Hystrix Dashboard and Netflix Turbine
-- **Log Tracing:** Sleuth, Zipkin
+- **Services Tracing:** Sleuth, Zipkin
 - **Centralized Configuration:** Spring Cloud Config Server
 - **Distributed Messaging System:** Apache Kafka
 
@@ -27,6 +27,7 @@
 ## Build And Run
 ### Build
 - `make docker/kafka/up` to start kafka cluster
+- `make docker/zipkin/up` to start zipkin
 - `make setup` to build shared **POM** and **common** module (it's necessary to run other services)
   - using **IntelliJ IDEA** file -> open -> select **spring-microservices** folder
   - Start `config-server -> eureka-server -> gateway-zuul` firstly and then other services
@@ -35,24 +36,34 @@
 - [Postman data](readme/spring-microservices.postman_collection.json)
 
 ### Demo
-- **Kafka Brokers**: localhost:19092, localhost:29092, localhost:39092
-- **Config Server**: http://localhost:8888/service-name/service-name.properties
-  >http://localhost:8888/order-service/order-service.properties will get all properties of order-service
+#### URL:
+1. **Kafka Brokers**: localhost:19092, localhost:29092, localhost:39092
+2. **Centralized Config Server**: http://localhost:8888/service-name/service-name.properties
+  >For example: http://localhost:8888/order-service/order-service.properties will get all properties of order-service
   ```bash
     username: nguyenvm
     password: nguyenvm@123
   ```
-- **Eureka Server**: http://localhost:8761 (service registry & service discovery)
-- **Gateway Zuul**: http://localhost:8762
-- **Authenticate**: http://localhost:8762/auth
+3. **Eureka Server**: http://localhost:8761 (service registry & service discovery)
+4. **Gateway Zuul**: http://localhost:8762
+5. **Authenticate**: http://localhost:8762/auth
   ```bash
     username: admin
     password: 12345
   ```
-- **Order service**: http://localhost:8762/order?id=1&isFallBack=false (isFallBack=true will perform fall back method)
-- **Hystrix Dashboard**: http://localhost:9898/hystrix
-- **Turbine Stream**: http://localhost:8989 (used by **Hystrix Dashboard** to monitor stream)
-#### Hystrix Dashboard
+6. **Order Service**: http://localhost:8762/order?id=1&isFallBack=false (isFallBack=true will perform fall back method)
+7. **Hystrix Dashboard**: http://localhost:9898/hystrix
+8. **Turbine Stream**: http://localhost:8989 (used by **Hystrix Dashboard** to monitor stream)
+9. **Tracing Services**: http://localhost:9411/zipkin
+
+#### Hystrix Dashboard:
 ![Hystrix Dashboard](readme/hystrix-stream.png)
-#### Eureka Server
+#### Eureka Server:
 ![Eureka Server](readme/eureka-server.png)
+
+#### Tracking Services With Zipkin:
+![zipkin-dependencies](readme/zipkin-dependencies.png)
+
+![zipkin-trace-success](readme/zipkin-trace-success.png)
+
+![zipkin-trace-failure](readme/zipkin-trace-failure.png)

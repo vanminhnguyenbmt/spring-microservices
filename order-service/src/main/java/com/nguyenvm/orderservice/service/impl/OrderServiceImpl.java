@@ -1,6 +1,7 @@
 package com.nguyenvm.orderservice.service.impl;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.nguyenvm.common.util.CommonConstants;
 import com.nguyenvm.orderservice.model.dto.OrderDTO;
 import com.nguyenvm.orderservice.model.dto.mapper.OrderEntityToDTOMapper;
 import com.nguyenvm.orderservice.model.entity.OrderEntity;
@@ -34,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
         // get list of available products
         // isFallBack = true will make a fallback call
-        List<Object> products = restTemplate.getForObject("http://stock-service/product/getAll?isFallBack=" + isFallBack, List.class);
+        List<Object> products = restTemplate.getForObject(CommonConstants.STOCK_SERVICE_URL + isFallBack, List.class);
         OrderDTO orderDTO = OrderEntityToDTOMapper.base(order, CollectionUtils.isEmpty(products) ? Collections.EMPTY_LIST : products);
 
         // send message to order-topic

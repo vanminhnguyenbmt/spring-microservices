@@ -1,5 +1,6 @@
 package com.nguyenvm.orderservice.service.kafka;
 
+import com.nguyenvm.common.util.CommonConstants;
 import com.nguyenvm.orderservice.model.dto.OrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -17,7 +18,6 @@ import java.util.Map;
 public class OrderProducer {
     private final static String topicTest1 = "nguyenvm-topic-1";
     private final static String topicTest2 = "nguyenvm-topic-2";
-    private final static String orderTopic = "order-topic";
 
     @Resource
     @Qualifier("producerConfig")
@@ -32,7 +32,7 @@ public class OrderProducer {
 
     public void produceOrderTopic(OrderDTO orderDTO) {
         try (KafkaProducer producer = new KafkaProducer<String, String>(producerConfig)) {
-            producer.send(new ProducerRecord(orderTopic, orderDTO));
+            producer.send(new ProducerRecord(CommonConstants.ORDER_TOPIC, orderDTO));
         }
     }
 
@@ -60,6 +60,6 @@ public class OrderProducer {
     }
 
     public void produceOrderTopicUsingKafkaTemplate(OrderDTO orderDTO) {
-        kafkaTemplate.send(new ProducerRecord(orderTopic, orderDTO));
+        kafkaTemplate.send(new ProducerRecord(CommonConstants.ORDER_TOPIC, orderDTO));
     }
 }

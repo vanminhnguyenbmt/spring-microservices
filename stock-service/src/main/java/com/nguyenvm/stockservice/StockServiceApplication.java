@@ -12,8 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.nguyenvm.common", "com.nguyenvm.stockservice"})
 public class StockServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StockServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StockServiceApplication.class, args);
+    }
 
 }

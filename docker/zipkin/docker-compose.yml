@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  zipkin:
+    image: ghcr.io/openzipkin/zipkin:${TAG:-latest}
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+
+networks:
+  default:
+    external: true
+    name: kafka_default

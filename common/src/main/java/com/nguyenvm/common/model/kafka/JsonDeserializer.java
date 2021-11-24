@@ -1,4 +1,4 @@
-package com.nguyenvm.stockservice.model.kafka;
+package com.nguyenvm.common.model.kafka;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nguyenvm.common.util.ContextUtil;
