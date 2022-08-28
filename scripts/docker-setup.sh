@@ -6,4 +6,9 @@ then
   command="$command -d"
 fi
 
-docker-compose -f docker/$1/docker-compose.yml $command
+if [ $2 == reset ]
+then
+  command="up --build --remove-orphans --force-recreate"
+fi
+
+docker-compose -f $1/docker-compose.yml $command

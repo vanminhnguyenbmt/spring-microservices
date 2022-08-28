@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  ## Start - Config server definition
+  config-server:
+    container_name: config-server
+    build:
+      context: ../config-server
+    ports:
+      - "8888:8888"
+  ## End - Config server definition
+
+  ## Start - Eureka server definition
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: ../eureka-server
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+    restart: on-failure
+  ## End - Eureka server definition
+
+  ## Start - Gateway zuul definition
+  gateway-zuul:
+    container_name: gateway-zuul
+    build:
+      context: ../gateway-zuul
+    ports:
+      - "8762:8762"
+    depends_on:
+      - config-server
+      - eureka-server
+    restart: on-failure
+  ## End - Gateway zuul definition
+
+  ## Start - Authenticate service definition
+  auth-service:
+    container_name: auth-service
+    build:
+      context: ../auth-service
+    ports:
+      - "9100:9100"
+    depends_on:
+      - config-server
+      - eureka-server
+    restart: on-failure
+  ## End - Authenticate service definition
+
+  ## Start - Order service definition
+  order-service:
+    container_name: order-service
+    build:
+      context: ../order-service
+    ports:
+      - "8200:8200"
+    depends_on:
+      - config-server
+      - eureka-server
+    restart: on-failure
+  ## End - Order service definition
+
+  ## Start - Stock service definition
+  stock-service:
+    container_name: stock-service
+    build:
+      context: ../stock-service
+    ports:
+      - "8100:8100"
+    depends_on:
+      - config-server
+      - eureka-server
+    restart: on-failure
+  ## End - Stock service definition
+
+  ## Start - Turbine stream definition
+  turbine-stream:
+    container_name: turbine-stream
+    build:
+      context: ../turbine-stream
+    ports:
+      - "8989:8989"
+    depends_on:
+      - config-server
+    restart: on-failure
+  ## End - Turbine stream definition
+
+  ## Start - Hystrix dashboard definition
+  hytrix-dashboard:
+    container_name: hytrix-dashboard
+    build:
+      context: ../hystrix-dashboard
+    ports:
+      - "9898:9898"
+    depends_on:
+      - config-server
+    restart: on-failure
+  ## End - Hystrix dashboard definition
+
+networks:
+  default:
+    external: true
+    name: kafka_default

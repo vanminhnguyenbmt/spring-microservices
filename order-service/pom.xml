@@ -12,7 +12,7 @@
     <groupId>com.nguyenvm</groupId>
     <artifactId>order-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>order-service</name>
     <description>Order Service</description>
 

@@ -12,7 +12,7 @@
     <groupId>com.nguyenvm</groupId>
     <artifactId>auth-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>auth-service</name>
     <description>Authentication Service</description>
 

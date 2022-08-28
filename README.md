@@ -10,7 +10,7 @@
 ## Netflix OSS framework
 
 ### Overview
-![Netflix OSS's ecosystem](readme/netflix-oss-framework.png)
+![Netflix OSS's ecosystem](docs/images/netflix-oss-framework.png)
 
 - **Service Discovery:** Netflix Eureka
 - **Circuit Breaker:** Netflix Hystrix
@@ -22,18 +22,15 @@
 - **Distributed Messaging System:** Apache Kafka
 
 ### Architecture
-![Netflix OSS's architecture](readme/netflix-oss-architecture.png)
+![Netflix OSS's architecture](docs/images/netflix-oss-architecture.png)
 
 ## Build And Run
 ### Build
-- `make docker/kafka/up` to start kafka cluster
-- `make docker/zipkin/up` to start zipkin
-- `make setup` to build shared **POM** and **common** module (it's necessary to run other services)
-  - using **IntelliJ IDEA** file -> open -> select **spring-microservices** folder
-  - Start `config-server -> eureka-server -> gateway-zuul` firstly and then other services
-- `make build` to build and install shared dependencies
-   ![Build output](readme/build-output.png)
-- [Postman data](readme/spring-microservices.postman_collection.json)
+1. `make setup/all` to setup maven and build jar for the whole project
+   ![Build output](docs/images/build-output.png)
+2. `make docker/all/up` to build and start all project
+3. `make docker/all/stop` to stop all project
+- [Postman data](docs/spring-microservices.postman_collection.json)
 
 ### Demo
 #### URL:
@@ -53,17 +50,17 @@
   ```
 6. **Order Service**: http://localhost:8762/order?id=1&isFallBack=false (isFallBack=true will perform fall back method)
 7. **Hystrix Dashboard**: http://localhost:9898/hystrix
-8. **Turbine Stream**: http://localhost:8989 (used by **Hystrix Dashboard** to monitor stream)
+8. **Turbine Stream**: http://localhost:8989 (Stream Aggregator is used by **Hystrix Dashboard** to monitor stream)
 9. **Tracing Services**: http://localhost:9411/zipkin
 
 #### Hystrix Dashboard:
-![Hystrix Dashboard](readme/hystrix-stream.png)
+![Hystrix Dashboard](docs/images/hystrix-stream.png)
 #### Eureka Server:
-![Eureka Server](readme/eureka-server.png)
+![Eureka Server](docs/images/eureka-server.png)
 
 #### Tracking Services With Zipkin:
-![zipkin-dependencies](readme/zipkin-dependencies.png)
+![zipkin-dependencies](docs/images/zipkin-dependencies.png)
 
-![zipkin-trace-success](readme/zipkin-trace-success.png)
+![zipkin-trace-success](docs/images/zipkin-trace-success.png)
 
-![zipkin-trace-failure](readme/zipkin-trace-failure.png)
+![zipkin-trace-failure](docs/images/zipkin-trace-failure.png)

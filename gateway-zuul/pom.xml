@@ -12,7 +12,7 @@
     <groupId>com.nguyenvm</groupId>
     <artifactId>gateway-zuul</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>gateway-zuul</name>
     <description>Gateway Zuul</description>
 
