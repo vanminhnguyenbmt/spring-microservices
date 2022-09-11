@@ -28,7 +28,7 @@
 ### Build
 1. `make setup/all` to setup maven and build jar for the whole project
    ![Build output](docs/images/build-output.png)
-2. `make docker/all/up` to build and start all project
+2. `make docker/all/up` to start all project
 3. `make docker/all/stop` to stop all project
 - [Postman data](docs/spring-microservices.postman_collection.json)
 

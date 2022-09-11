@@ -6,6 +6,9 @@ services:
     container_name: config-server
     build:
       context: ../config-server
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "8888:8888"
   ## End - Config server definition
@@ -15,6 +18,9 @@ services:
     container_name: eureka-server
     build:
       context: ../eureka-server
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "8761:8761"
     depends_on:
@@ -27,6 +33,9 @@ services:
     container_name: gateway-zuul
     build:
       context: ../gateway-zuul
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "8762:8762"
     depends_on:
@@ -40,6 +49,9 @@ services:
     container_name: auth-service
     build:
       context: ../auth-service
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "9100:9100"
     depends_on:
@@ -53,6 +65,9 @@ services:
     container_name: order-service
     build:
       context: ../order-service
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "8200:8200"
     depends_on:
@@ -66,6 +81,9 @@ services:
     container_name: stock-service
     build:
       context: ../stock-service
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "8100:8100"
     depends_on:
@@ -79,6 +97,9 @@ services:
     container_name: turbine-stream
     build:
       context: ../turbine-stream
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "8989:8989"
     depends_on:
@@ -91,6 +112,9 @@ services:
     container_name: hytrix-dashboard
     build:
       context: ../hystrix-dashboard
+    environment:
+      CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
+      CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
     ports:
       - "9898:9898"
     depends_on:

@@ -49,24 +49,26 @@ docker/zipkin/down:
 docker/zipkin/stop:
 	@scripts/docker-setup.sh docker/zipkin stop
 
-docker/all/up:
+docker/infrastructure:
 	@make docker/kafka/up
+	@sleep 25
 	@scripts/create-topic.sh
 	@make docker/zipkin/up
+
+docker/all/up:
+	@make docker/infrastructure
 	@scripts/docker-setup.sh docker up
 
 docker/all/down:
 	@scripts/docker-setup.sh docker down
-	@make docker/kafka/down
 	@make docker/zipkin/down
+	@make docker/kafka/down
 
 docker/all/stop:
 	@scripts/docker-setup.sh docker stop
-	@make docker/kafka/stop
 	@make docker/zipkin/stop
+	@make docker/kafka/stop
 
 docker/all/reset:
+	@make docker/infrastructure
 	@scripts/docker-setup.sh docker reset
-	@make docker/kafka/up
-	@scripts/create-topic.sh
-	@make docker/zipkin/up
