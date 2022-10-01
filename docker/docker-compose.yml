@@ -21,6 +21,7 @@ services:
     environment:
       CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
       CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8761:8761"
     depends_on:
@@ -36,6 +37,7 @@ services:
     environment:
       CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
       CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8762:8762"
     depends_on:
@@ -52,6 +54,7 @@ services:
     environment:
       CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
       CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "9100:9100"
     depends_on:
@@ -68,6 +71,7 @@ services:
     environment:
       CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
       CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8200:8200"
     depends_on:
@@ -84,6 +88,7 @@ services:
     environment:
       CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
       CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8100:8100"
     depends_on:
@@ -100,6 +105,7 @@ services:
     environment:
       CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
       CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8989:8989"
     depends_on:
@@ -115,6 +121,7 @@ services:
     environment:
       CONFIG_SERVER_USERNAME: $CONFIG_SERVER_USERNAME
       CONFIG_SERVER_PASSWORD: $CONFIG_SERVER_PASSWORD
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "9898:9898"
     depends_on:

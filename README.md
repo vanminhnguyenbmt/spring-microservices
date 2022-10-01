@@ -29,8 +29,13 @@
 1. `make setup/all` to setup maven and build jar for the whole project
    ![Build output](docs/images/build-output.png)
 2. `make docker/all/up` to start all project
-3. `make docker/all/stop` to stop all project
-- [Postman data](docs/spring-microservices.postman_collection.json)
+3. `make docker/all/stop` to stop all project 
+4. For Running Local:
+- using **IntelliJ IDEA** file -> open -> select **spring-microservices** folder
+- `make setup/common` to build shared **POM** and **common** module
+- `make docker/infrastructure` to run kafka and zipkin
+- Start `config-server -> eureka-server -> gateway-zuul` firstly and then other services
+#### [Postman data](docs/spring-microservices.postman_collection.json)
 
 ### Demo
 #### URL:
@@ -50,7 +55,7 @@
   ```
 6. **Order Service**: http://localhost:8762/order?id=1&isFallBack=false (isFallBack=true will perform fall back method)
 7. **Hystrix Dashboard**: http://localhost:9898/hystrix
-8. **Turbine Stream**: http://localhost:8989 (Stream Aggregator is used by **Hystrix Dashboard** to monitor stream)
+8. **Turbine Stream**: http://localhost:8989 or http://turbine-stream:8989 (docker env) (Stream Aggregator is used by **Hystrix Dashboard** to monitor stream)
 9. **Tracing Services**: http://localhost:9411/zipkin
 
 #### Hystrix Dashboard:
